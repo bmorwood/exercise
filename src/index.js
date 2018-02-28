@@ -1,33 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Login from './components/login.js';
+import React from 'react'
+import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import './index.css'
+import Login from './components/login'
+import Navbar from './components/navbar'
+import Landing from './components/landing.js'
+import Dashboard from './components/dashboard.js'
+import { createStore, subscribe } from 'redux'
+import { Provider } from 'react-redux'
+import exerciseApp from './reducers'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom"
+
+let store = createStore(exerciseApp)
+
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      auth: false
-    };
-  }
-
-  handleClick() {
-    this.setState({
-      auth: true
-    });
-    console.log(this.state.auth);
-  }
-
   render() {
     return (
       <div className="App">
-        <Login onClick={() => this.handleClick()}/>
+        <Router>
+          <div>
+            <Navbar/>
+            <Route exact path="/" component={Landing} />
+            <Route path="/login" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
+          </div>
+        </Router>
       </div>
     );
   }
 }
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'));
