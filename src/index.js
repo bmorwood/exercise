@@ -24,7 +24,7 @@ store.subscribe (() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router>
       <div>
         <Navbar/>
         <Switch>
