@@ -1,9 +1,14 @@
-export const AUTH = 'AUTH'
 export const TYPINGPASSWORD = 'TYPINGPASSWORD'
 export const TYPINGUSERNAME = 'TYPINGUSERNAME'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 
-export function authenticateUser() {
-  return { type: AUTH }
+export function login(username) {
+  return { type: LOGIN, username }
+}
+
+export function logout() {
+  return { type: LOGOUT }
 }
 
 export function typingUsername(username) {

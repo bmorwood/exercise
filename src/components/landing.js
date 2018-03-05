@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-class Landing extends Component {
+
+class Landing extends React.Component {
   render() {
-    return (
-      <h2>Landing</h2>
-    );
+    if (!this.props.isLoggedIn) {
+      return (<h2>Landing</h2>)
+    }
+    return (<Redirect to='/dashboard'/>)
   }
 }
 
-export default Landing;
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(Landing);
